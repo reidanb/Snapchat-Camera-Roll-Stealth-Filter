@@ -11,8 +11,20 @@ I have identified a bug that allows users to take advantage of the 'Preview' fun
 
 Install Snapchat Lens Studio (https://ar.snap.com/download)
 
-Open up and Sign into Lens Studio using the account to gain the camera upload filter
+Open up and Sign into Lens Studio using the account to gain the camera upload filter:
 ![Login with Snapchat](docs/login_snap.jpg)
+
+Once logged in, select and open a sample template in Lens Studio:
+![sample template](docs/template.jpg)
+
+In the top right, select **Scan Snapcode**
+![Scan Snapcode](docs/pair_pc.jpg)
+then scan this using your phone:
+![Scan Phone Snapcode](docs/pair_phone.jpg)
+
+
+
+
 
 ## 🔗 Links
 [![snapchat](https://img.shields.io/badge/%F0%9F%94%97-Lens%20Studio-yellow)](https://ar.snap.com/lens-studio)
