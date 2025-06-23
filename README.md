@@ -9,6 +9,23 @@ I have identified a bug that allows users to take advantage of the 'Preview' fun
 
 ---
 
+## 📖 Extended Description
+
+Snapchat's Lens Studio enables creators to design and test augmented reality (AR) lenses. One of its core functions is allowing paired mobile devices to preview lenses directly within the Snapchat app. 
+
+During exploration, a security oversight was discovered that lets users send content from their **local camera roll** using the lens preview system, without any visible AR filter or watermark, effectively **spoofing the origin** of the content.
+
+This works by:
+- Extracting the `serial_uuid` from system memory using Process Hacker.
+- Exploiting the authenticated session between Lens Studio and Snapchat's mobile app.
+- Using a custom Python script to mimic a legitimate lens preview request.
+
+This bypass affects how Snapchat handles session previews and content authentication, opening the door to potentially misleading use of shared media.
+
+> ⚠️ Use this tool responsibly. Misuse may violate Snapchat’s terms of service and lead to permanent bans. This project is intended for research and awareness only.
+
+---
+
 ## Installation - Obtaining `serial_uuid` with Windows
 
 1. Install **Snapchat Lens Studio**: [https://ar.snap.com/download](https://ar.snap.com/download)  
@@ -86,14 +103,26 @@ I have identified a bug that allows users to take advantage of the 'Preview' fun
 
 ---
 
+## 📡 Overview - Snapchat API
+
+Snapchat’s API for Lens Studio relies on a structured flow that authenticates user sessions and links the desktop editor to the mobile Snapchat app. When a lens is previewed, a token (`serial_uuid`) is passed to validate the user’s session. This preview functionality assumes a trusted environment but lacks robust validation on the origin of the media being sent.
+
+This diagram demonstrates the flow:
+
+<p align="center">
+  <img src="https://www.gitbook.com/cdn-cgi/image/dpr=2,width=760,onerror=redirect,format=auto/https%3A%2F%2Ffiles.gitbook.com%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FGhM1LWMMLXupwbzoNCKT%252Fuploads%252FKheEo0Ku89ahW7BvofKI%252Fsnapchat_diagram.png%3Falt%3Dmedia%26token%3Dbc40e35f-fd72-49d3-90a1-e1340d64b260" alt="Snapchat API Diagram">
+</p>
+
+### Key Points:
+- Lens Studio generates a preview token tied to the session (`serial_uuid`).
+- The mobile app accepts this token and prepares a lens preview environment.
+- By injecting custom media and skipping watermark/AR checks, the lens preview becomes a **delivery channel** for unfiltered media.
+
+This method exposes a security gap in how Snapchat verifies preview content integrity.
+
+---
+
 ## 🔗 Links
 
 [![Lens Studio](https://img.shields.io/badge/%F0%9F%94%97-Lens%20Studio-yellow)](https://ar.snap.com/lens-studio)  
 [![Blog](https://img.shields.io/badge/%F0%9F%94%97-reidanb.gitlab.io-yellow)](https://reidanb.gitbook.io/home/blog/snapchat-lens-studio-staging-bug)
-
----
-
-## Overview - Snapchat API
-
-(Section still to be completed...)
-
